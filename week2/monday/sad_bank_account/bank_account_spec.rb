@@ -2,10 +2,10 @@ require("minitest/autorun")
 require("minitest/rg")
 require_relative("./bank_account")
 
-class TestBankAccount
+class TestBankAccount < MiniTest::Test
 
   def setup
-      @account = BankAccount.new('Jay', 5000, 'business', 1234)
+      @account = BankAccount.new('Jay', 5000, 'business')
     end
 
     def test_holder_name
@@ -33,9 +33,5 @@ class TestBankAccount
     def test_set_genre
       @account.genre = "personal"
       assert_equal("personal", @account.genre)
-    end
-
-    def test_sortcode
-      assert_equal(1234, @account.sortcode)
     end
 end

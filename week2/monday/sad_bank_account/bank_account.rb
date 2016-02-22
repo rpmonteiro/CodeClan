@@ -1,12 +1,11 @@
 class BankAccount
 
-  attr_accessor :holder_name, :genre, :balance, :sortcode
+  attr_accessor :holder_name, :genre, :balance
 
-  def initialize(holder_name, balance, genre, sortcode)
+  def initialize(holder_name, balance, genre)
     @holder_name = holder_name
     @balance = balance
     @genre = genre
-    @sortcode = sortcode
   end
 
 end
