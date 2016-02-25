@@ -1,11 +1,13 @@
 require "minitest/autorun"
 require 'minitest/rg'
+require_relative "../behaviours/fly"
+require_relative "../behaviours/quack"
 require_relative '../duck'
 
 class DuckTest < MiniTest::Test
 
   def setup
-    @duck = Duck.new
+    @duck = Duck.new(Quack.new, Fly.new)
   end
 
   def test_duck_can_fly
