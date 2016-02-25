@@ -22,6 +22,7 @@ class Bank
 
     for account in @accounts
       if account.balance > highest_balance
+        highest_balance = account.balance
         richest_account = account
       end
     end
