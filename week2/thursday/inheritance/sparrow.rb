@@ -1,7 +1,4 @@
-class Sparrow
+require_relative "bird"
+class Sparrow < Bird
   
-  def fly
-    return "flying"
-  end
-
 end

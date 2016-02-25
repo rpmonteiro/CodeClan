@@ -9,7 +9,7 @@ class SparrowTest < MiniTest::Test
   end
 
   def test_sparrow_can_fly
-    assert_equal("flying", @sparrow.fly)
+    assert_equal("flying high", @sparrow.fly)
   end
 
 end
