@@ -16,4 +16,8 @@ class DuckTest < MiniTest::Test
     assert_equal(2, @duck.num_legs)
   end
 
+  def test_duck_can_quack
+    assert_equal("quack", @duck.call)
+  end
+
 end

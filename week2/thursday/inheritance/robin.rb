@@ -1,8 +1,8 @@
 require_relative "bird"
-class Sparrow < Bird
+class Robin < Bird
 
   def call
     return "chirp"
   end
-  
+
 end

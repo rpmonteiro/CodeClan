@@ -12,4 +12,8 @@ class SparrowTest < MiniTest::Test
     assert_equal("flying high", @sparrow.fly)
   end
 
+  def test_sparrow_can_chirp
+    assert_equal("chirp", @sparrow.call)
+  end
+
 end
