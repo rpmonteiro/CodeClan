@@ -1,5 +1,5 @@
 class Chirp
   def call
-    return "Chirp"
+    return "chirp"
   end
 end
