@@ -5,8 +5,8 @@ get '/info' do
   return 'info page.. yeahh'
 end
 
-get '/name' do
-  return 'oh hai!'
+get '/name/:first/:last' do
+  return "your name is #{params[:first]}  #{params[:last]}"
 end
 
 get '/address' do
