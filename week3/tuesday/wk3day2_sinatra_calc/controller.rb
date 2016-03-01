@@ -34,3 +34,15 @@ get '/divide/:num1/:num2' do
   @calculation = calculator.divide
   erb(:'user/result')
 end
+
+get '/pokemon' do
+  @charizard = 'Charizard'
+  @pikachu = 'Pikachu'
+  erb(:pokemon)
+end
+
+get '/info' do
+  @name = 'Ricardo'
+  @info = 'Hey, I\'m from Portugal'
+  erb(:info)
+end
