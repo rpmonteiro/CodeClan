@@ -5,6 +5,8 @@ require 'json'
 require_relative './models/calculator'
 
 get '/all/:num1/:num2' do
+  content_type :json
+
   calculator = Calculator.new(params[:num1].to_i, params[:num2].to_i)
   result = {
     add: calculator.add,
@@ -12,6 +14,7 @@ get '/all/:num1/:num2' do
     divide: calculator.divide,
     multiply: calculator.multiply
   }
+  return result.to_json
 end
 
 get '/add/:num1/:num2' do
