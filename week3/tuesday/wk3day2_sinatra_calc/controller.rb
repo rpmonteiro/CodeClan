@@ -19,15 +19,18 @@ end
 
 get '/add/:num1/:num2' do
   calculator = Calculator.new(params[:num1].to_i, params[:num2].to_i)
-  return calculator.add.to_s
+  @calculation = calculator.add
+  erb(:'user/result')
 end
 
 get '/subtract/:num1/:num2' do
   calculator = Calculator.new(params[:num1].to_i, params[:num2].to_i)
-  return calculator.subtract.to_s
+  @calculation = calculator.subtract
+    erb(:'user/result')
 end
 
 get '/divide/:num1/:num2' do
   calculator = Calculator.new(params[:num1].to_i, params[:num2].to_i)
-  return calculator.divide.to_s
+  @calculation = calculator.divide
+  erb(:'user/result')
 end
