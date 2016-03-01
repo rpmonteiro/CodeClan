@@ -8,6 +8,7 @@ class TestCalculator < Minitest::Test
     @calculator = Calculator.new(4, 2)
     @calculator2 = Calculator.new(15, 5)
     @calculator3 = Calculator.new(30, 10)
+    @calculator4 = Calculator.new(3, 4)
   end
 
   def test_add
@@ -20,5 +21,9 @@ class TestCalculator < Minitest::Test
 
   def test_divide
     assert_equal(3, @calculator3.divide)
+  end
+
+  def test_multiply
+    assert_equal(12, @calculator4.multiply)
   end
 end
