@@ -1,11 +1,12 @@
 require 'sinatra'
 require 'sinatra/contrib/all' if development?
+require 'json'
 
 require_relative 'models/pizza.rb'
 
 get '/pizza' do
-  @pizza = Pizza.new
-  @pizza.all
+  @pizzas = Pizza.all()
+  erb(:index)
 end
 
 get '/pizza/new' do
@@ -14,5 +15,6 @@ end
 
 post '/pizza' do
   @pizza = Pizza.new(params)
+  @pizza.save
   erb(:create)
 end

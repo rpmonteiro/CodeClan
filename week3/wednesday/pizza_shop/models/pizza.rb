@@ -1,4 +1,5 @@
 require 'pg'
+
 class Pizza
   attr_reader :first_name, :last_name, :pizza_type, :quantity
 
@@ -34,9 +35,12 @@ class Pizza
   end
 
   def self.all
-    db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
+    db = PG.connect( {dbname: 'pizza_shop', host: 'localhost'} )
     sql = 'SELECT * FROM pizzas'
     pizzas = db.exec(sql)
-    result = pizzas.map { |pizza| Pizza.new(pizza) }
+    result = pizzas.map { |pizza| Pizza.new( pizza ) }
+    db.close
+    return  result
   end
+
 end
