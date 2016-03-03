@@ -43,4 +43,9 @@ end
 ## DESTROY
 post '/pizza/:id/delete' do
   Pizza.destroy(params[:id])
+  redirect to '/pizza'
+end
+
+get '/' do
+  redirect to '/pizza'
 end
