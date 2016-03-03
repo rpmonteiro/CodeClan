@@ -34,15 +34,19 @@ class Pizza
     db.close
   end
 
-
-
   def self.all
-    db = PG.connect( {dbname: 'pizza_shop', host: 'localhost'} )
-    sql = 'SELECT * FROM pizzas'
-    pizzas = db.exec(sql)
-    result = pizzas.map { |pizza| Pizza.new( pizza ) }
+    db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
+    pizzas = db.exec('SELECT * FROM pizzas')
+    result = pizzas.map { |pizza| Pizza.new(pizza) }
     db.close
-    return  result
+    result
   end
 
+  def self.find(id)
+    db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
+    order = db.exec("SELECT * FROM pizzas WHERE id=#{id}")
+    result = Pizza.new(order[0]) || 'Not Found!'
+    db.close
+    result
+  end
 end
