@@ -4,6 +4,7 @@ require 'json'
 
 require_relative 'models/pizza.rb'
 
+## NEW
 get '/pizza/new' do
   erb(:new)
 end
@@ -26,6 +27,13 @@ get '/pizza/:id/edit' do
   erb(:edit)
 end
 
+## UPDATE
+post '/pizza/:id' do
+  @pizza = Pizza.update(params)
+  redirect to '/pizza/#{params[:id]}'
+end
+
+## CREATE
 post '/pizza' do
   @pizza = Pizza.new(params)
   @pizza.save

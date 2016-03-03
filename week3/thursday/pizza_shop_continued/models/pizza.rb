@@ -20,7 +20,6 @@ class Pizza
   end
 
   def save
-    db = PG.connect( {dbname: 'pizza_shop', host: 'localhost'} )
     sql = "INSERT INTO pizzas (
     first_name,
     last_name,
@@ -31,23 +30,38 @@ class Pizza
       '#{@pizza_type}',
       #{@quantity}
     )"
-    db.exec(sql)
-    db.close
+    Pizza.run_sql
   end
 
   def self.all
-    db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
-    pizzas = db.exec('SELECT * FROM pizzas')
+    pizzas = Pizza.run_sql('SELECT * FROM pizzas')
     result = pizzas.map { |pizza| Pizza.new(pizza) }
-    db.close
     result
   end
 
   def self.find(id)
-    db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
-    order = db.exec("SELECT * FROM pizzas WHERE id=#{id}")
+    order = Pizzas.run_sql("SELECT * FROM pizzas WHERE id=#{id}")
     result = Pizza.new(order[0])
-    db.close
     result
+  end
+
+  def self.update(options)
+    sql = "UPDATE pizzas SET
+    first_name='#{options['first_name']}',
+    last_name='#{options['last_name']}',
+    pizza_type='#{options['pizza_type']}',
+    quantity='#{options['quantity']}'
+    WHERE id='#{options['id']}'"
+    Pizza.run_sql(sql)
+  end
+
+  def self.run_sql(sql)
+    begin
+      db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
+      result = db.exec(sql)
+      return result
+    ensure
+      db.close
+    end
   end
 end
