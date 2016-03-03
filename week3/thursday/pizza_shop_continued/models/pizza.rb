@@ -1,13 +1,14 @@
 require 'pg'
 
 class Pizza
-  attr_reader :first_name, :last_name, :pizza_type, :quantity
+  attr_reader :first_name, :last_name, :pizza_type, :quantity, :id
 
   def initialize(options)
     @first_name = options['first_name']
     @last_name = options['last_name']
     @pizza_type = options['pizza_type']
     @quantity = options['quantity'].to_i
+    @id = nil || options['id']
   end
 
   def full_name
@@ -45,7 +46,7 @@ class Pizza
   def self.find(id)
     db = PG.connect(dbname: 'pizza_shop', host: 'localhost')
     order = db.exec("SELECT * FROM pizzas WHERE id=#{id}")
-    result = Pizza.new(order[0]) || 'Not Found!'
+    result = Pizza.new(order[0])
     db.close
     result
   end
