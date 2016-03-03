@@ -30,7 +30,7 @@ class Pizza
       '#{@pizza_type}',
       #{@quantity}
     )"
-    Pizza.run_sql
+    Pizza.run_sql(sql)
   end
 
   def self.all
@@ -40,8 +40,8 @@ class Pizza
   end
 
   def self.find(id)
-    order = Pizzas.run_sql("SELECT * FROM pizzas WHERE id=#{id}")
-    result = Pizza.new(order[0])
+    pizza = Pizza.run_sql("SELECT * FROM pizzas WHERE id=#{id}")
+    result = Pizza.new(pizza[0])
     result
   end
 
@@ -52,6 +52,11 @@ class Pizza
     pizza_type='#{options['pizza_type']}',
     quantity='#{options['quantity']}'
     WHERE id='#{options['id']}'"
+    Pizza.run_sql(sql)
+  end
+
+  def self.destroy(id)
+    sql = "DELETE FROM pizzas WHERE id=#{id}"
     Pizza.run_sql(sql)
   end
 

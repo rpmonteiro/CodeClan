@@ -37,5 +37,10 @@ end
 post '/pizza' do
   @pizza = Pizza.new(params)
   @pizza.save
-  erb(:create)
+  redirect to '/pizza'
+end
+
+## DESTROY
+post '/pizza/:id/delete' do
+  Pizza.destroy(params[:id])
 end

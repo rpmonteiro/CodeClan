@@ -4,3 +4,6 @@
 <p>Order:</p>
 <p><%= @pizza.quantity %> x <%= @pizza.pizza_type %></p>
 <a href="/pizza/<%= @pizza.id %>/edit">Edit</a>
+<form action="/pizza/<%= @pizza.id %>/delete" method="post">
+  <input type="submit" value="Delete"></input>
+</form>
