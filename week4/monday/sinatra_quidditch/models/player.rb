@@ -1,4 +1,4 @@
-require_relative('../models/team.rb')
+require_relative('./team.rb')
 class Player
 
   attr_reader :name, :team_id, :id

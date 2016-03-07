@@ -1,0 +1,7 @@
+<h1>Teams</h1>
+
+<ul>
+  <% @teams.each do |team| %>
+    <li><a href="/teams/<%= team.id %>"><%= team.name %></a> Managed by <%= team.manager %> </li>
+  <% end %>
+</ul>
