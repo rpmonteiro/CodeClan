@@ -21,6 +21,7 @@ end
 #SHOW
 get '/teams/:id' do
   @team = Team.find(params[:id])
+  erb :'teams/show'
 end
 
 #EDIT

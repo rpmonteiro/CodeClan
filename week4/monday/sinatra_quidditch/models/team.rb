@@ -19,7 +19,8 @@ class Team
 
   def self.find(id)
     sql = "SELECT * FROM teams WHERE id = #{id}"
-    result = Team.run_sql(sql)
+    team = Team.run_sql(sql)
+    result = Team.new(team[0])
     result
   end
 

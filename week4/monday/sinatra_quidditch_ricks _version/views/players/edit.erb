@@ -1,0 +1,24 @@
+<div class="content">
+
+  <h2>Edit Player</h2>
+
+  <form action="/players/<%= @player.id %>" method="post">
+    <label for="name">First Name:</label>
+    <input type="text" name="first_name" id="first_name" value="<%= @player.first_name %>"><br>
+    
+    <label for="manager">Last Name:</label>
+    <input type="text" name="last_name" id="last_name" value="<%= @player.last_name %>"><br>
+
+    <label for="team_id">Team:</label>
+    <select id="team_id" name="team_id">
+      <% @teams.each do |team| %>
+        <option value="<%= team.id %>" <% if team.id == @player.team_id %> selected="true" <% end %>>
+          <%= team.name %>
+        </option>
+      <% end %>
+    </select><br>
+
+    <input type='submit' value="Update Player">
+  </form>
+
+</div>
