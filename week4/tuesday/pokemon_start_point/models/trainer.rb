@@ -10,9 +10,15 @@ class Trainer
     @name = options['name']
   end
 
-  def save()
+  def last_entry
+    sql = 'SELECT * FROM Trainers ORDER BY id DESC limit 1'
+    Trainer.map_item(sql)
+  end
+
+  def save
     sql = "INSERT INTO Trainers (name) VALUES ('#{ @name }')"
-    SqlRunner.run_sql( sql )
+    SqlRunner.run_sql(sql)
+    last_entry
   end
 
   def self.delete_all
@@ -20,20 +26,19 @@ class Trainer
     SqlRunner.run_sql(sql)
   end
 
-  def self.all()
-    sql = "SELECT * FROM Trainers"
-    return Trainer.map_items(sql)
+  def self.all
+    sql = 'SELECT * FROM Trainers'
+    Trainer.map_items(sql)
   end
 
   def self.map_items(sql)
-    trainers = SqlRunner.run_sql( sql )
-    result = trainers.map { |t| Trainer.new( t ) }
-    return result
+    trainers = SqlRunner.run_sql(sql)
+    result = trainers.map { |t| Trainer.new(t) }
+    result
   end
 
   def self.map_item(sql)
     result = Trainer.map_items(sql)
-    return result.first
+    result.first
   end
-
 end

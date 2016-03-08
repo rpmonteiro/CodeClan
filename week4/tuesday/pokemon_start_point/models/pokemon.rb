@@ -1,9 +1,8 @@
-require( 'pg' )
+require('pg')
 require_relative('trainer')
 require_relative('../db/sql_runner')
 
 class Pokemon
-
   attr_reader( :id, :name )
 
   def initialize( options )
@@ -11,12 +10,18 @@ class Pokemon
     @name = options['name']
   end
 
-  def save()
-    sql = "INSERT INTO Pokemons (name) VALUES ('#{ @name }')"
-    SqlRunner.run_sql( sql )
+  def last_entry
+    sql = 'SELECT * FROM Pokemons ORDER BY id DESC limit 1'
+    Pokemon.map_item(sql)
   end
 
-  def trainers()
+  def save
+    sql = "INSERT INTO Pokemons (name) VALUES ('#{ @name }')"
+    SqlRunner.run_sql(sql)
+    last_entry
+  end
+
+  def trainers
 
   end
 
@@ -25,20 +30,19 @@ class Pokemon
     SqlRunner.run_sql(sql)
   end
 
-  def self.all()
+  def self.all
     sql = "SELECT * FROM Pokemons"
-    return Pokemon.map_items(sql)
+    Pokemon.map_items(sql)
   end
 
   def self.map_items(sql)
     pokemon = SqlRunner.run_sql(sql)
-    result = pokemon.map { |product| Pokemon.new( product ) }
-    return result
+    result = pokemon.map { |product| Pokemon.new(product) }
+    result
   end
 
   def self.map_item(sql)
     result = Pokemon.map_items(sql)
-    return result.first
+    result.first
   end
-
 end

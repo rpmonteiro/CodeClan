@@ -1,7 +1,6 @@
 require_relative '../db/sql_runner.rb'
 
 class OwnedPokemon
-
   attr_reader :id, :trainer_id, :pokemon_id
 
   def initialize(params)
@@ -11,7 +10,11 @@ class OwnedPokemon
   end
 
   def save
-
+    sql = "
+      INSERT INTO OwnedPokemons( trainer_id, pokemon_id )
+      VALUES ( #{@trainer_id}, #{@pokemon_id} )
+      "
+    SqlRunner.run_sql(sql)
   end
 
   def self.all
@@ -19,9 +22,7 @@ class OwnedPokemon
   end
 
   def self.delete_all
-
+    sql = 'DELETE FROM OwnedPokemons'
+    SqlRunner.run_sql(sql)
   end
-
-
-
 end
