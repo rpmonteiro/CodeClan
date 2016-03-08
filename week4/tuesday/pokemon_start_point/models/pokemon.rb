@@ -2,7 +2,7 @@ require( 'pg' )
 require_relative('trainer')
 require_relative('../db/sql_runner')
 
-class Pokemon 
+class Pokemon
 
   attr_reader( :id, :name )
 
@@ -17,8 +17,12 @@ class Pokemon
   end
 
   def trainers()
-    sql = "SELECT t.* from Trainers u INNER JOIN OwnedPokemons o ON o.trainer_id = t.id WHERE pokemon_id = #{@id};"
-    return Trainer.map_items(sql)
+
+  end
+
+  def self.delete_all
+    sql = 'DELETE FROM Pokemons'
+    SqlRunner.run_sql(sql)
   end
 
   def self.all()

@@ -15,6 +15,11 @@ class Trainer
     SqlRunner.run_sql( sql )
   end
 
+  def self.delete_all
+    sql = 'DELETE FROM Trainers'
+    SqlRunner.run_sql(sql)
+  end
+
   def self.all()
     sql = "SELECT * FROM Trainers"
     return Trainer.map_items(sql)

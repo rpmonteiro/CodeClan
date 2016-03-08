@@ -11,3 +11,9 @@ CREATE TABLE Pokemons (
   id serial4 primary key,
   name VARCHAR(255)
 );
+
+CREATE TABLE OwnedPokemons (
+  id serial4 primary key,
+  trainer_id int4 references Trainers(id),
+  pokemon_id int4 references Pokemons(id)
+);
