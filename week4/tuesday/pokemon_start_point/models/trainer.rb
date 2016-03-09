@@ -21,6 +21,13 @@ class Trainer
     last_entry
   end
 
+  def pokemon
+    sql = "SELECT p.* FROM Pokemons p
+    INNER JOIN OwnedPokemons o ON o.pokemon_id = p.id
+    WHERE o.trainer_id = #{@id}"
+    Pokemon.map_item(sql)
+  end
+
   def self.delete_all
     sql = 'DELETE FROM Trainers'
     SqlRunner.run_sql(sql)

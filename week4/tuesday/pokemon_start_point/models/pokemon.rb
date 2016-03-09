@@ -3,9 +3,9 @@ require_relative('trainer')
 require_relative('../db/sql_runner')
 
 class Pokemon
-  attr_reader( :id, :name )
+  attr_reader(:id, :name)
 
-  def initialize( options )
+  def initialize(options)
     @id = options['id']
     @name = options['name']
   end
@@ -15,14 +15,20 @@ class Pokemon
     Pokemon.map_item(sql)
   end
 
+  def trainers
+    sql = "
+      SELECT t.*
+      FROM Trainers t
+      INNER JOIN OwnedPokemons o ON o.trainer_id = t.id
+      WHERE o.pokemon_id = #{@id}
+      "
+    Pokemon.map_items(sql)
+  end
+
   def save
     sql = "INSERT INTO Pokemons (name) VALUES ('#{ @name }')"
     SqlRunner.run_sql(sql)
     last_entry
-  end
-
-  def trainers
-
   end
 
   def self.delete_all
