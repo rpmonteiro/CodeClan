@@ -17,11 +17,17 @@ class Team
 
   def self.create( options )
     sql = "INSERT INTO teams (
-        name) 
+        name)
         VALUES (
         '#{ options['name'] }' )"
     SqlRunner.execute( sql )
     return Team.new( Team.last_entry() )
+  end
+
+  def self.find(id)
+    sql = "SELECT * FROM teams WHERE id = #{id.to_i}"
+    result = SqlRunner.execute(sql)
+    Team.new(result[0])
   end
 
   def self.last_entry
@@ -29,7 +35,7 @@ class Team
     return SqlRunner.execute( sql ).first()
   end
 
-  def self.delete_all 
+  def self.delete_all
     sql = "DELETE FROM teams"
     SqlRunner.execute( sql )
   end
