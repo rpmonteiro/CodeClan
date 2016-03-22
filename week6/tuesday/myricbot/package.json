@@ -1,14 +1,17 @@
 {
   "name": "myricbot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Friendly Robot",
+  "main": "robot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha robot_spec.js"
   },
-  "author": "",
+  "author": "rpmonteiro",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.6.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
   }
 }
