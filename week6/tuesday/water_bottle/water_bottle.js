@@ -21,10 +21,10 @@ var waterBottle = {
   put_in_fridge: function(duration) {
     var fridge_temperature = 276.15; //3 degrees celsius
     // T(t) = Ts + (T0 - Ts ) e(-kt)
-    result = fridge_temperature + Math.pow(this.temperature - fridge_temperature,
-      Math.E * ((0.1797) * duration));
-    this.temperature = result;
+    var exponential = Math.exp(-0.17 * duration);
+    result = fridge_temperature + (this.temperature - fridge_temperature) * exponential;
     console.log(result);
+    this.temperature = result;
     return this.temperature;
   }
 };
