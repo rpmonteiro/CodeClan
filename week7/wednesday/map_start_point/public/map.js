@@ -4,4 +4,12 @@ function Map(latlng, zoom) {
     center: latlng,
     zoom: zoom
   });
+
+  this.addMarker = function(coordinates) {
+    var marker = new google.maps.Marker({
+      position: coordinates,
+      map: this.googleMap
+    })
+  }
+
 }
