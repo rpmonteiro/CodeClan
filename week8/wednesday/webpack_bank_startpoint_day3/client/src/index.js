@@ -14,6 +14,22 @@ var populateAccountList = function(listElement, accounts){
   }
 }
 
+var displayBank = function(bank) {
+  var totalDisplay = document.getElementById('total');
+  var businessTotalDisplay = document.getElementById('business-total');
+  var personalTotalDisplay = document.getElementById('personal-total');
+
+  totalDisplay.innerText = "Total: £" + bank.totalCash();
+  businessTotalDisplay.innerText = "Total Business: £" + bank.totalCash('business');
+  personalTotalDisplay.innerText = "Total Personal: £" + bank.totalCash('personal');
+
+  var businessAccountList = document.getElementById('business-accounts');
+  var personalAccountList = document.getElementById('personal-accounts');
+
+  populateAccountList(businessAccountList, bank.filteredAccounts('business'))
+  populateAccountList(personalAccountList, bank.filteredAccounts('personal'))
+}
+
 window.onload = function(){
   var bank = new Bank();
   var request = new XMLHttpRequest();
@@ -27,20 +43,22 @@ window.onload = function(){
       for(var account of accounts){
         bank.addAccount(new Account(account));
       }
-      var totalDisplay = document.getElementById('total');
-      var businessTotalDisplay = document.getElementById('business-total');
-      var personalTotalDisplay = document.getElementById('personal-total');
-
-      totalDisplay.innerText = "Total: £" + bank.totalCash();
-      businessTotalDisplay.innerText = "Total Business: £" + bank.totalCash('business');
-      personalTotalDisplay.innerText = "Total Personal: £" + bank.totalCash('personal');
-
-      var businessAccountList = document.getElementById('business-accounts');
-      var personalAccountList = document.getElementById('personal-accounts');
-
-      populateAccountList(businessAccountList, bank.filteredAccounts('business'))
-      populateAccountList(personalAccountList, bank.filteredAccounts('personal'))
+      displayBank(bank);
     }
   }
   request.send();
+  var form = document.querySelector('#add-account');
+  form.onsubmit = function(e) {
+    e.preventDefault();
+    var accountData = {
+      owner: document.querySelector('#owner').value,
+      amount: parseFloat(document.querySelector('#amount')).value,
+      type: document.querySelector('#type').value,
+    };
+    console.log('account', accountData);
+    var account = new Account(accountData);
+    bank.addAccount(account);
+
+    displayBank(bank);
+  }
 };
