@@ -26,8 +26,11 @@ var displayBank = function(bank) {
   var businessAccountList = document.getElementById('business-accounts');
   var personalAccountList = document.getElementById('personal-accounts');
 
-  populateAccountList(businessAccountList, bank.filteredAccounts('business'))
-  populateAccountList(personalAccountList, bank.filteredAccounts('personal'))
+  businessAccountList.innerHTML = '';
+  personalAccountList.innerHTML = '';
+
+  populateAccountList(businessAccountList, bank.filteredAccounts('business'));
+  populateAccountList(personalAccountList, bank.filteredAccounts('personal'));
 }
 
 window.onload = function(){
@@ -52,13 +55,19 @@ window.onload = function(){
     e.preventDefault();
     var accountData = {
       owner: document.querySelector('#owner').value,
-      amount: parseFloat(document.querySelector('#amount')).value,
-      type: document.querySelector('#type').value,
+      amount: parseFloat(document.querySelector('#amount').value),
+      type: document.querySelector('#type').value.toLowerCase(),
     };
     console.log('account', accountData);
     var account = new Account(accountData);
     bank.addAccount(account);
-
     displayBank(bank);
+    var request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:3000/accounts");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onload = function() {
+      console.log('got response');
+    }
+    request.send(JSON.stringify(accountData));
   }
 };
