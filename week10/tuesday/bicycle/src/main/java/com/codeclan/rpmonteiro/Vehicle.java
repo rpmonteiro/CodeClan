@@ -1,4 +1,4 @@
-package com.codeclan.ps;
+package com.codeclan.rpmonteiro;
 
 public abstract class Vehicle {
 	

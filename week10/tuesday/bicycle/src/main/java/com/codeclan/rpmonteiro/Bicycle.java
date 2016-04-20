@@ -1,16 +1,15 @@
 package com.codeclan.rpmonteiro;
 
-public class Bicycle {
+public class Bicycle extends Vehicle {
 
 	private int currentSpeed;
-	private int numberOfWheels;
 	private String name;
 	private int currentGear;
 	private int gears;
 	private int id;
-	private String colour;
 	
 	public Bicycle() {
+		super();
 		gears = 21;
 		numberOfWheels = 2;
 		colour = "Tomato";
@@ -68,17 +67,6 @@ public class Bicycle {
 	public void setGears(int gears) {
 		this.gears = gears;
 	}
-
-	
-	public String getColour() {
-		return colour;
-	}
-
-	
-	public void setColour(String colour) {
-		this.colour = colour;
-	}
-
 	
 	public void speedUp(int newSpeed) {
 		currentSpeed += newSpeed;
