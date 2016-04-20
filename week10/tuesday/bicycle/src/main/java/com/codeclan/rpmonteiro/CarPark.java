@@ -10,8 +10,22 @@ public class CarPark {
 		carPark = new ArrayList<>(10);
 	}
 	
-	public int park(Vehicle v) {
-		carPark.add(v);
+	public boolean park(Vehicle v) {
+		return carPark.add(v);
 	}
-		
+	
+	public ArrayList<Vehicle> getCarPark() {
+		return carPark;
+	}
+	
+	public boolean exit(Vehicle v) throws VehicleNotFoundException {
+		for(Vehicle parkedVehicle : carPark) {
+			if (parkedVehicle.getRegistration().equals(v.getRegistration())) {
+				carPark.remove(v);
+				return true;
+			}
+		}
+		throw new VehicleNotFoundException(v);
+	}
+	
 }

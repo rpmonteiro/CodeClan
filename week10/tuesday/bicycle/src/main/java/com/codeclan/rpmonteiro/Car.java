@@ -8,4 +8,8 @@ public class Car extends Vehicle {
 		super();
 		numberOfDoors = 5;
 	}
+	
+	public Car(String registration) {
+		this.registration = registration;
+	}
 }
