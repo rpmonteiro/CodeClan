@@ -1,6 +1,6 @@
 package com.codeclan.ps;
 
-public class BassGuitar {
+public class BassGuitar extends Instrument {
 
 	private String name;
 	private int numberOfStrings;
@@ -10,7 +10,8 @@ public class BassGuitar {
 		numberOfStrings = 5;
 	}
 	
-	public void play() {
-		System.out.println("I am a " + name + " and I have " + numberOfStrings + " strings");
+	@Override
+	public String play() {
+		return "I am a " + name + " and I have " + numberOfStrings + " strings";
 	}
 }
