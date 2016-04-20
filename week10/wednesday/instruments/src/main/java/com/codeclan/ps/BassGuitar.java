@@ -6,12 +6,12 @@ public class BassGuitar extends Instrument {
 	private int numberOfStrings;
 	
 	public BassGuitar() {
-		name = "BassGuitar";
+		name = "Bass Guitar";
 		numberOfStrings = 5;
 	}
 	
 	@Override
 	public String play() {
-		return "I am a " + name + " and I have " + numberOfStrings + " strings";
+		return "I'm a " + name + " and I have " + numberOfStrings + " strings.";
 	}
 }
