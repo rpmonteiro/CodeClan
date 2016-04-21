@@ -9,10 +9,14 @@ public class Bicycle extends Vehicle {
 	private int id;
 	
 	public Bicycle() {
-		super();
+		this(new Bell());
 		gears = 21;
 		numberOfWheels = 2;
 		colour = "Tomato";
+	}
+	
+	private Bicycle(Ringable ringer) {
+		super(ringer);
 	}
 	
 	public int getId() {

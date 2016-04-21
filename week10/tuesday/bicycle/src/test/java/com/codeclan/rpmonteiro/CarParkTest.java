@@ -40,4 +40,10 @@ public class CarParkTest {
 		}
 		assertTrue(hasExited);
 	}
+	
+	@Test
+	public void testCarParksSuccessfully() {
+		cp.park(v);
+		assertEquals(cp.getCarPark().size(), 1);
+	}
 }

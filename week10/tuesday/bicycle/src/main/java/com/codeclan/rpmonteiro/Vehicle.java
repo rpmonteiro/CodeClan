@@ -9,11 +9,20 @@ public abstract class Vehicle {
 	protected String colour;
 	protected int maxOccupancy;
 	protected int speed;
+	protected Ringable ringer;
 	
 	protected Vehicle() {
-		speed = 0;
+		speed = 0;	
 	}
 
+	protected Vehicle(Ringable ringer) {
+		this.ringer = ringer;
+	}
+	
+	public String giveWarning() {
+		return ringer.makeSound();
+	}
+	
 	protected int getNumberOfWheels() {
 		return numberOfWheels;
 	}

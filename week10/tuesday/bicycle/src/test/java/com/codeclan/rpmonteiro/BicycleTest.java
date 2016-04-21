@@ -34,4 +34,10 @@ public class BicycleTest
 	  assertEquals(b.getGears(), 21);
    }
    
+   @Test
+   public void testBicycleWarning() {
+	   Bicycle b = new Bicycle();
+	   assertEquals(b.giveWarning(), "RingRing!");
+   }
+   
 }
