@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ public class AmphibianDetails extends AppCompatActivity {
     TextView mMediaText;
     TextView mNumLegsText;
     ImageView mPictureImageView;
+    Button mAddFavouriteButton;
+    AmphibianList mFavourites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,11 +36,13 @@ public class AmphibianDetails extends AppCompatActivity {
         mMediaText = (TextView) findViewById(R.id.text_media);
         mNumLegsText = (TextView) findViewById(R.id.text_legs);
         mPictureImageView = (ImageView) findViewById(R.id.img_amphibian);
+        mAddFavouriteButton = (Button) findViewById(R.id.add_favourite_button);
+        mFavourites = new AmphibianList();
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
-        String name = extras.getString("name");
+        final String name = extras.getString("name");
         String species = extras.getString("species");
         String numLegs = extras.getString("numberOfLegs");
         String media = extras.getString("media");
@@ -51,5 +57,12 @@ public class AmphibianDetails extends AppCompatActivity {
         mMediaText.setText(media);
         mNumLegsText.setText(numLegs);
 
+
+        mAddFavouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("HelloFrog", name + " is to be added to favourites");
+            }
+        });
     }
 }

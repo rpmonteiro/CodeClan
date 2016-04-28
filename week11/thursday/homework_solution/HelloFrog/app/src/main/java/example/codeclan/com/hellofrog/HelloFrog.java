@@ -28,11 +28,13 @@ public class HelloFrog extends AppCompatActivity {
     ListView mListView;
 
     JSONAdapter mJSONAdapter;
+    AmphibianList mFavourites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("HelloFrog:", "onCreate called");
         super.onCreate(savedInstanceState);
+        mFavourites = new AmphibianList();
 
         setContentView(R.layout.activity_main);
 
@@ -54,6 +56,7 @@ public class HelloFrog extends AppCompatActivity {
                 intent.putExtra("media", jsonObject.optString("media"));
                 intent.putExtra("numberOfLegs", jsonObject.optString("numberOfLegs"));
                 intent.putExtra("imageUrl", jsonObject.optString("imageUrl"));
+                intent.putExtra("favourites", mFavourites.getList());
 
                 startActivity(intent);
             }
