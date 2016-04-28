@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/img_amphibian"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp"
+                  android:weightSum="1">
+
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerVertical="true"
+            android:text="Name: "
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerVertical="false"
+            android:text="Hello Frog :-)"
+            android:layout_alignParentLeft="false"
+            android:layout_weight="0.54"/>
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="25dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/label_species"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerVertical="true"
+            android:text="Species: "
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/text_species"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/hello_toad"
+            android:layout_centerVertical="false"
+            android:layout_alignParentRight="true"/>
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="25dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/label_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerVertical="true"
+            android:text="Seen in: "
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/text_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/hello_toad"
+            android:layout_alignParentRight="true"/>
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_marginTop="25dp"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp">
+        <TextView
+            android:id="@+id/label_numLegs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerVertical="true"
+            android:text="Number of legs: "
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/text_legs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/hello_toad"
+            android:layout_alignParentRight="true"/>
+    </LinearLayout>
+
+</LinearLayout>
