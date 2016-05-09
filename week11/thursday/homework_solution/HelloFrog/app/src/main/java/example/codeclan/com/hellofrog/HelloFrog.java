@@ -24,6 +24,7 @@ import org.json.JSONObject;
 public class HelloFrog extends AppCompatActivity {
 
     private static final String API_URL = "http://cc-amphibian-api.herokuapp.com/";
+    private static final int REQUEST_CODE_FAVOURITES = 0;
 
     ListView mListView;
 
@@ -58,7 +59,7 @@ public class HelloFrog extends AppCompatActivity {
                 intent.putExtra("imageUrl", jsonObject.optString("imageUrl"));
                 intent.putExtra("favourites", mFavourites.getList());
 
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_FAVOURITES);
             }
         });
 
@@ -73,7 +74,7 @@ public class HelloFrog extends AppCompatActivity {
                 Log.d("HelloFrog: ", jsonObject.toString());
                 JSONArray data = jsonObject.optJSONArray("Amphibians");
                 if (data != null) {
-                    mJSONAdapter.updateData(data);
+                    mJSONAdapter.updateData(data, mFavourites);
                 } else {
                     Log.e("HelloFrog: ", "No data found :-(");
                 }
@@ -84,6 +85,25 @@ public class HelloFrog extends AppCompatActivity {
                 Log.e("HelloFrog:", "Failure: " + statusCode + " " + throwable.getMessage());
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("HelloFrog", "onActivityResult Started");
+
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_CODE_FAVOURITES) {
+            if (data == null) {
+                return;
+            }
+
+            mFavourites = AmphibianDetails.getFavourites(data);
+        }
+        Log.d("HelloFrog", "Fetching the damn frogs again...");
+        fetchAmphibians();
     }
 }
 

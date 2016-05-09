@@ -1,9 +1,11 @@
 package example.codeclan.com.hellofrog;
 
+import java.io.Serializable;
+
 /**
  * Created by sandy on 25/04/2016.
  */
-public class Amphibian {
+public class Amphibian implements Serializable {
     private String mName;
     private String mSpecies;
     private int mNumLegs;

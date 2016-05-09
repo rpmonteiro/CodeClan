@@ -29,4 +29,13 @@
         android:layout_below="@id/text_name"
         android:layout_alignLeft="@id/text_name"/>
 
+    <ImageView
+        android:id="@+id/image_favourited"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@android:drawable/star_big_on"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
