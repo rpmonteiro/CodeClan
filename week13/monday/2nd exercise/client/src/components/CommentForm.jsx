@@ -15,7 +15,11 @@ var CommentForm = React.createClass({
 
   handleSubmit: function(event) {
     event.preventDefault();
-    this.props.onCommentSubmit({author: this.state.author, text: this.state.text})
+    console.log("adding a comment");
+    this.props.onCommentSubmit({
+      author: this.state.author,
+      text: this.state.text
+    })
   },
 
   render: function() {

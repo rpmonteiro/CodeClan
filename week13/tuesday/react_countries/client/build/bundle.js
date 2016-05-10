@@ -48,13 +48,13 @@
 	
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var CommentBox = __webpack_require__(160);
+	var CountriesBox = __webpack_require__(159);
 	
 	window.onload = function () {
 	  ReactDOM.render(React.createElement(
 	    'div',
 	    null,
-	    React.createElement(CommentBox, null)
+	    React.createElement(CountriesBox, null)
 	  ), document.getElementById('app'));
 	};
 
@@ -19667,29 +19667,34 @@
 
 
 /***/ },
-/* 159 */,
-/* 160 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var CommentList = __webpack_require__(161);
-	var CommentForm = __webpack_require__(162);
+	var CountriesSelect = __webpack_require__(160);
+	var CountriesInfoBox = __webpack_require__(161);
 	
-	var sampleData = [{ id: 1, author: 'Rick', text: 'cool' }, { id: 2, author: 'Keith', text: 'howdy' }];
-	
-	var CommentBox = React.createClass({
-	  displayName: 'CommentBox',
+	var CountriesBox = React.createClass({
+	  displayName: 'CountriesBox',
 	
 	  getInitialState: function getInitialState() {
-	    return { data: sampleData };
+	    return { countries: [], selectedCountry: '' };
 	  },
 	
-	  handleCommentSubmit: function handleCommentSubmit(comment) {
-	    comment.id = Date.now();
-	    var newComments = this.state.data.concat([comment]);
-	    this.setState({ data: newComments });
+	  setSelectedCountry: function setSelectedCountry(country) {
+	    this.setState({ selectedCountry: country });
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    var request = new XMLHttpRequest();
+	    request.open('GET', 'https://restcountries.eu/rest/v1/all');
+	    request.onload = function () {
+	      var data = JSON.parse(request.responseText);
+	      this.setState({ countries: data });
+	    }.bind(this);
+	    request.send();
 	  },
 	
 	  render: function render() {
@@ -19699,15 +19704,71 @@
 	      React.createElement(
 	        'h4',
 	        null,
-	        'Hello I am a Comment Box'
+	        'CountriesBox'
 	      ),
-	      React.createElement(CommentList, { data: this.state.data }),
-	      React.createElement(CommentForm, { onCommentSubmit: this.handleCommentSubmit })
+	      React.createElement(CountriesSelect, {
+	        countries: this.state.countries,
+	        onSelectCountry: this.setSelectedCountry }),
+	      React.createElement(CountriesInfoBox, {
+	        countries: this.state.countries,
+	        selectedCountry: this.state.selectedCountry })
 	    );
 	  }
 	});
 	
-	module.exports = CommentBox;
+	module.exports = CountriesBox;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var CountriesSelect = React.createClass({
+	  displayName: 'CountriesSelect',
+	
+	  getInitialState: function getInitialState() {
+	    return { selectedIndex: null };
+	  },
+	
+	  populateOptions: function populateOptions() {
+	    return this.props.countries.map(function (country, index) {
+	      return React.createElement(
+	        'option',
+	        { value: index, key: index },
+	        country.name
+	      );
+	    });
+	  },
+	
+	  handleChange: function handleChange(e) {
+	    e.preventDefault();
+	    var newIndex = e.target.value;
+	    this.setState({ selectedIndex: newIndex });
+	    this.props.onSelectCountry(this.props.countries[newIndex]);
+	  },
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'CountriesSelect'
+	      ),
+	      React.createElement(
+	        'select',
+	        { value: this.state.selectedIndex, onChange: this.handleChange },
+	        this.populateOptions()
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = CountriesSelect;
 
 /***/ },
 /* 161 */
@@ -19716,114 +19777,58 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var Comment = __webpack_require__(163);
 	
-	var CommentList = React.createClass({
-	  displayName: 'CommentList',
+	var CountriesInfoBox = React.createClass({
+	  displayName: 'CountriesInfoBox',
 	
-	  render: function render() {
-	    var commentNodes = this.props.data.map(function (comment) {
-	      return React.createElement(
-	        Comment,
-	        { author: comment.author, key: comment.id },
-	        comment.text
-	      );
-	    });
+	  renderCountry: function renderCountry(country) {
 	    return React.createElement(
 	      'div',
-	      null,
-	      commentNodes
-	    );
-	  }
-	});
-	
-	module.exports = CommentList;
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var CommentForm = React.createClass({
-	  displayName: 'CommentForm',
-	
-	  getInitialState: function getInitialState() {
-	    return { author: '', text: '' };
-	  },
-	
-	  handleAuthorChange: function handleAuthorChange(event) {
-	    this.setState({ author: event.target.value });
-	  },
-	
-	  handleTextChange: function handleTextChange(event) {
-	    this.setState({ text: event.target.value });
-	  },
-	
-	  handleSubmit: function handleSubmit(event) {
-	    event.preventDefault();
-	    console.log("adding a comment");
-	    this.props.onCommentSubmit({
-	      author: this.state.author,
-	      text: this.state.text
-	    });
-	  },
-	
-	  render: function render() {
-	    return React.createElement(
-	      'form',
-	      { onSubmit: this.handleSubmit },
-	      React.createElement('input', {
-	        type: 'text',
-	        placeholder: 'Your name',
-	        value: this.state.author,
-	        onChange: this.handleAuthorChange
-	      }),
-	      React.createElement('input', {
-	        type: 'text',
-	        placeholder: 'Say something...',
-	        value: this.state.text,
-	        onChange: this.handleTextChange
-	      }),
+	      { key: country.name },
 	      React.createElement(
-	        'button',
-	        { type: 'submit' },
-	        'Post!'
+	        'p',
+	        null,
+	        'Name: ',
+	        country.name
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Population: ',
+	        country.population
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Area: ',
+	        country.area
 	      )
 	    );
-	  }
-	});
+	  },
 	
-	module.exports = CommentForm;
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var Comment = React.createClass({
-	  displayName: 'Comment',
+	  renderNeighbourCountries: function renderNeighbourCountries(neighbours) {
+	    if (neighbours) {
+	      return neighbours.map(function (alpha3Code, index) {
+	        for (var i = 0; i < this.props.countries.length; i++) {
+	          if (this.props.countries[i].alpha3Code === alpha3Code) {
+	            return this.renderCountry(this.props.countries[i]);
+	          }
+	        }
+	      }.bind(this));
+	    }
+	  },
 	
 	  render: function render() {
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        this.props.author
-	      ),
-	      this.props.children
+	      this.renderCountry(this.props.selectedCountry),
+	      this.renderNeighbourCountries(this.props.selectedCountry.borders)
 	    );
 	  }
 	});
 	
-	module.exports = Comment;
+	module.exports = CountriesInfoBox;
 
 /***/ }
 /******/ ]);
