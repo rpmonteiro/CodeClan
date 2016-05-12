@@ -19691,13 +19691,14 @@
 	
 	  componentDidMount: function componentDidMount() {
 	    this.fetchComments();
+	    setInterval(this.fetchComments, 1000);
 	  },
 	
 	  handleCommentSubmit: function handleCommentSubmit(comment) {
-	    // var comments = this.state.data;
-	    // comment._id = Date.now();
-	    // var newComments = comments.concat([comment]);
-	    // this.setState({data: newComments});
+	    var comments = this.state.data;
+	    comment._id = Date.now();
+	    var newComments = comments.concat([comment]);
+	    this.setState({ data: newComments });
 	    var request = new XMLHttpRequest();
 	    request.open("POST", 'api/comments');
 	    request.setRequestHeader("Content-Type", "application/json");
