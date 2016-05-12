@@ -60,7 +60,18 @@
 	var hashHistory = __webpack_require__(163).hashHistory;
 	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(
+	    Router,
+	    { history: hashHistory },
+	    React.createElement(
+	      Route,
+	      { path: '/', component: Main },
+	      React.createElement(IndexRoute, { component: Home }),
+	      React.createElement(Route, { path: 'home', component: Home }),
+	      React.createElement(Route, { path: 'about', component: About }),
+	      React.createElement(Route, { path: 'pricing', component: Pricing })
+	    )
+	  ), document.getElementById('app'));
 	};
 
 /***/ },

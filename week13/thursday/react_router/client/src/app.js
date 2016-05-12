@@ -13,7 +13,14 @@ var hashHistory = require('react-router').hashHistory;
 
 window.onload = function(){
   ReactDOM.render(
-    <Main></Main>,
+    <Router history={hashHistory}>
+      <Route path="/" component={Main}>
+        <IndexRoute component={Home}/>
+        <Route path="home" component={Home}/>
+        <Route path="about" component={About}/>
+        <Route path="pricing" component={Pricing}/>
+      </Route>
+    </Router>,
     document.getElementById('app')
   );
 }
