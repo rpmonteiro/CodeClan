@@ -2,6 +2,7 @@
 class AnimalsController < ApplicationController
   def index
     # @animals = [{ name: 'Tiger' }, { name: 'Snow Leopard' }]
+    @animals = Animal.all
     # render :json => @animals Renders json automatically. no more html
     respond_to do |format|
       format.html
