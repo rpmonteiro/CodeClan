@@ -18,4 +18,13 @@ class AnimalsController < ApplicationController
     animal = Animal.find(params[:id])
     render json: animal
   end
+
+  def create
+    # animal = Animal.create(params[:animal]) this is not fine because
+    # params animal can be anything... not safe.
+    # on this one below we give it very specific instructions
+    # it's called strong parametres
+    animal = Animal.create(params.require(:animal).permit([:name, :legs]))
+    render json: animal
+  end
 end
