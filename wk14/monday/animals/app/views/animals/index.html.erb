@@ -2,6 +2,6 @@
 
 <ul>
   <% @animals.each do |animal| %>
-    <li><%= animal[:name] %> </li>
+    <li><%= animal.name %> <%= animal.move %> </li>
   <% end %>
 </ul>

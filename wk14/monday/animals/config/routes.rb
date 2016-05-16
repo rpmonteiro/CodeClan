@@ -9,9 +9,14 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   # get({'animals' => 'animals#index'}) syntactic sugar
-  get 'animals' => 'animals#index'
+  # get 'animals' => 'animals#index'
+  # get 'animals/:id' => 'animals#show'
+  # substitutes all the manual route setup
+  resources :animals
 
   get 'plants' => 'plants#index'
+
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
