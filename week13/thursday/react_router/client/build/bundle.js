@@ -19693,36 +19693,13 @@
 	var Home = __webpack_require__(161);
 	var Pricing = __webpack_require__(162);
 	
+	var Link = __webpack_require__(163).Link;
+	
 	var Main = React.createClass({
 	  displayName: 'Main',
 	
-	  getInitialState: function getInitialState() {
-	    return { page: null };
-	  },
-	
-	  gotoHome: function gotoHome(e) {
-	    e.preventDefault();
-	    this.setState({ page: '/home' });
-	  },
-	  gotoAbout: function gotoAbout(e) {
-	    e.preventDefault();
-	    this.setState({ page: '/about' });
-	  },
-	  gotoPricing: function gotoPricing(e) {
-	    e.preventDefault();
-	    this.setState({ page: '/pricing' });
-	  },
 	
 	  render: function render() {
-	    var child;
-	    switch (this.state.page) {
-	      case '/about':
-	        child = React.createElement(About, null);break;
-	      case '/pricing':
-	        child = React.createElement(Pricing, null);break;
-	      default:
-	        child = React.createElement(Home, null);
-	    }
 	
 	    return React.createElement(
 	      'div',
@@ -19739,8 +19716,8 @@
 	          'li',
 	          null,
 	          React.createElement(
-	            'a',
-	            { onClick: this.gotoHome, href: '', page: '/home' },
+	            Link,
+	            { to: '/home' },
 	            'Home'
 	          )
 	        ),
@@ -19748,8 +19725,8 @@
 	          'li',
 	          null,
 	          React.createElement(
-	            'a',
-	            { onClick: this.gotoAbout, href: '', page: '/about' },
+	            Link,
+	            { to: '/about' },
 	            'About'
 	          )
 	        ),
@@ -19757,13 +19734,13 @@
 	          'li',
 	          null,
 	          React.createElement(
-	            'a',
-	            { onClick: this.gotoPricing, href: '', page: '/pricing' },
+	            Link,
+	            { to: '/pricing' },
 	            'Pricing'
 	          )
 	        )
 	      ),
-	      child
+	      this.props.children
 	    );
 	  }
 	});
