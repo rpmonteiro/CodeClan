@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  artist_id: 
+  venue_id: 
+  price: 9.99
+  date: 2016-05-17 11:21:16
+
+two:
+  name: MyText
+  artist_id: 
+  venue_id: 
+  price: 9.99
+  date: 2016-05-17 11:21:16
