@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ArtistTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'has a name' do
+    assert_equal('Bonnie Tyler', artists(:one).name)
+  end
 end
