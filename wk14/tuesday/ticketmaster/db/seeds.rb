@@ -9,7 +9,12 @@
 # delete all ensures we don't duplicate record in the database if we run the
 # seeds file multiple times
 Artist.delete_all
+Album.delete_all
 # exclamation mark means that if there's an error, it'll fail
 # instead of just returning null
-Artist.create!(name: 'Oasis')
-Artist.create!(name: 'Justin Bieber')
+artist1 = Artist.create!(name: 'Oasis')
+artist2 = Artist.create!(name: 'Justin Bieber')
+
+# Album.create!(name: 'Be Here Now', artist_id: artist1.id) alternative syntax
+# an album can be created through an artist
+artist1.albums.create(name: 'Be Here Now')
