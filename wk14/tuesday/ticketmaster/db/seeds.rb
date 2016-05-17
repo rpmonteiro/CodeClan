@@ -17,4 +17,5 @@ artist2 = Artist.create!(name: 'Justin Bieber')
 
 # Album.create!(name: 'Be Here Now', artist_id: artist1.id) alternative syntax
 # an album can be created through an artist
-artist1.albums.create(name: 'Be Here Now')
+artist1.albums.create(name: 'Yeah. Oasis, bitch.')
+artist2.albums.create(name: 'Baby baby babyy')
