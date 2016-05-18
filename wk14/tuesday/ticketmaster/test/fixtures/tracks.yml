@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  album_id: 
+  title: MyText
+  duration: 9.99
+
+two:
+  album_id: 
+  title: MyText
+  duration: 9.99

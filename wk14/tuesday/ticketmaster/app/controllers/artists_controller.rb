@@ -6,6 +6,11 @@ class ArtistsController < ApplicationController
 
   def show
     artist = Artist.find(params[:id])
-    render json: artist.as_json(include: [:albums])
+    render json: artist.as_json(
+      include: [
+        { albums: { include: :tracks } },
+        { gigs: { include: :venue } }
+      ]
+    )
   end
 end
