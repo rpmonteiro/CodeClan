@@ -1,18 +1,17 @@
 class CommentsController < ApplicationController
   def index
-    comments = [
-      {
-        id: 1,
-        author: 'Topogigio',
-        text: 'This is a comment'
-      },
-      {
-        id: 2,
-        author: 'T-REX',
-        text: 'ONOMNOMNOMNOM'
-      }
-    ]
-
+    comments = Comment.all
     render json: comments
+  end
+
+  def create
+    comment = Comment.create(comment_params)
+    render json: comment
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:text, :author)
   end
 end
