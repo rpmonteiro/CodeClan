@@ -51,7 +51,7 @@
 	var CommentBox = __webpack_require__(159);
 	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(CommentBox, { url: '/api/comments' }), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(CommentBox, { url: 'localhost:5000/api/comments' }), document.getElementById('app'));
 	};
 
 /***/ },
@@ -219,6 +219,9 @@
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -19676,6 +19679,7 @@
 	    var url = this.props.url;
 	    var request = new XMLHttpRequest();
 	    request.open("GET", url);
+	    request.setRequestHeader("Content-Type", "application/json");
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
@@ -19685,12 +19689,12 @@
 	    request.send(null);
 	  },
 	  componentDidMount: function componentDidMount() {
-	    setInterval(this.loadCommentsFromServer, 1000);
+	    // setInterval(this.loadCommentsFromServer, 1000);
 	    this.loadCommentsFromServer();
 	  },
 	
 	  getInitialState: function getInitialState() {
-	    return { data: [{ _id: 1, author: 'Jay', text: 'Hello' }] };
+	    return { data: [] };
 	  },
 	  handleCommentSubmit: function handleCommentSubmit(comment) {
 	    var comments = this.state.data;

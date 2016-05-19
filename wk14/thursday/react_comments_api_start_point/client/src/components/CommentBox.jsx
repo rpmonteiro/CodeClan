@@ -17,7 +17,7 @@ var CommentBox = React.createClass({
     request.send(null);
   },
   componentDidMount: function() {
-    setInterval(this.loadCommentsFromServer, 1000);
+    // setInterval(this.loadCommentsFromServer, 1000);
     this.loadCommentsFromServer();
   },
 

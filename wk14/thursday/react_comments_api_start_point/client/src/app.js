@@ -4,7 +4,7 @@ var CommentBox = require('./components/CommentBox.jsx');
 
 window.onload = function(){
   ReactDOM.render(
-    <CommentBox url="/api/comments"/>,
+    <CommentBox url="localhost:5000/api/comments"/>,
     document.getElementById('app')
   );
 }
