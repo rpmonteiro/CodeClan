@@ -6,6 +6,10 @@ class AccountsController < ApplicationController
   end
 
   def total
-    current_user.accounts_total
+    total = 0
+    current_user.accounts.each do |account|
+      total += account.amount
+    end
+    render json: total
   end
 end
