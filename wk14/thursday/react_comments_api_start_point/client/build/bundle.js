@@ -51,7 +51,7 @@
 	var CommentBox = __webpack_require__(159);
 	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(CommentBox, { url: 'localhost:5000/api/comments' }), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(CommentBox, { url: 'http://localhost:5000/api/comments' }), document.getElementById('app'));
 	};
 
 /***/ },
